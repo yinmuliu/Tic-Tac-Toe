@@ -6,6 +6,11 @@
     text-align: center;
 }
 
+
+.displayPlayer {
+    text-align: center;
+}
+
 .container {
     display: flex;
     justify-content: space-around;
@@ -26,8 +31,9 @@
     border: 1px solid black;
 }
 
-.game-status {
+.announcer {
     text-align: center;
+    visibility: hidden;
 }
 
 .game-restart {
