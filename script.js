@@ -1,7 +1,7 @@
 // get the elements needed to work on
 const blocks = document.querySelectorAll('.block'); //return an array of blocks
 const playersTurn = document.querySelector('.playersTurn') // for displaying player's turn
-const announceWin = document.querySelector('.announcer');
+const winMessage = document.querySelector('.announcer');
 const restartButton = document.querySelector('.game-restart');
 
 
@@ -14,14 +14,9 @@ const handleClick = (clickBlockEvent) => {
     let clickedBlock = clickBlockEvent.target;
     let clickedBlockIndex = clickedBlock.dataset['blockIndex'];
     // Place sign
-    if (currentPlayer === 'Player X') {
-        clickedBlock.innerHTML = 'X';
-    } else if (currentPlayer === 'Player O') {
-        clickedBlock.innerHTML = 'O';
-    }
+    placeSign(currentPlayer, clickedBlock)
     // Check for win
     checkWin(clickedBlockIndex)
-    // Check for draw
     // Switch turn
     switchPlayer();
 }
@@ -33,8 +28,12 @@ for (let block of blocks) {
 
 
 // place a sign in the block when it is clicked
-const placeSign = (player) => {
-    
+const placeSign = (player, clickedBlock) => {
+    if (player === 'Player X') {
+        clickedBlock.innerHTML = 'X';
+    } else if (player === 'Player O') {
+        clickedBlock.innerHTML = 'O';
+    }
 }
 
 // change player in display after each click
@@ -76,18 +75,18 @@ const checkWin = (index) => {
         // indexFilled[move0] returns the value (player name) that occupied the object key (block index)
         if (indexFilled[move0] === 'Player X' && indexFilled[move1] === 'Player X' && indexFilled[move2] === 'Player X') {
             // when player X fill the right block index combination, it wins
-            console.log(`Player X wins`);
-            return `Player X wins`
+            winMessage.innerHTML = `Player X wins`
+            winMessage.style.visibility = 'visible'
         } else if (indexFilled[move0] === 'Player O' && indexFilled[move1] === 'Player O' && indexFilled[move2] === 'Player O') {
             // when player O fill the right block index combination, it wins
-            console.log(`Player O wins`);
-            return `Player O wins`
+            winMessage.innerHTML = `Player O wins`
+            winMessage.style.visibility = 'visible'
         } 
     }
     // create a condition to check tie: when all blocks has been filled but no winning condition is satisfied
     if (Object.keys(indexFilled).length === 9) {
-        console.log(`It's a tie!`); 
-        return `It's a tie`
+        winMessage.innerHTML = `It's a tie!`
+        winMessage.style.visibility = 'visible'
     }
-
+    
 }
