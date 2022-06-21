@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Life+Savers&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <section id="gamepage">
-        <h1>Tic-Tac-Toe</h1>
+        <header>
+            <h1>Tic-Tac-Toe</h1>
+        </header>
         <h3 class="displayPlayer">It's <span class="playersTurn">Player X</span>'s turn!</h3>
         <div class="container">
             <div class="player" id="playerX">
@@ -32,8 +37,11 @@
                 <p class="playerscore">Score: </p>
             </div>
         </div>
+    </section>
+    <section class="hidden" id="resultpage">
         <h3 class="announcer">Player X wins!</h3>
-        <button class="game-restart">Restart</button>
+        <button class="game-restart">Play Again</button>
+        <button class="game-end">End Game</button>
     </section>
     <script src="./script.js"></script>
 </body>

@@ -13,12 +13,19 @@ let indexFilled = {};
 const handleClick = (clickBlockEvent) => {
     let clickedBlock = clickBlockEvent.target;
     let clickedBlockIndex = clickedBlock.dataset['blockIndex'];
+
     // Place sign
     placeSign(currentPlayer, clickedBlock)
     // Check for win
     checkWin(clickedBlockIndex)
     // Switch turn
     switchPlayer();
+    
+    // if (checkWin(clickedBlockIndex)) {
+    //     endGame()
+    // } else {
+    //     switchPlayer()
+    // }
 }
 
 // add event handler for each block, so they respond to clicks only once
@@ -59,7 +66,7 @@ const winCondition = [
     [3, 4, 5],
 ]
 
-// create a function to check win and return a string to announce win
+// check win and return a boolean
 const checkWin = (index) => {
     // create a propertyIndex variable to convert block index to string
     let propertyIndex = index.toString()
@@ -75,18 +82,27 @@ const checkWin = (index) => {
         // indexFilled[move0] returns the value (player name) that occupied the object key (block index)
         if (indexFilled[move0] === 'Player X' && indexFilled[move1] === 'Player X' && indexFilled[move2] === 'Player X') {
             // when player X fill the right block index combination, it wins
-            winMessage.innerHTML = `Player X wins`
+            winMessage.innerHTML = `Player X wins!`
             winMessage.style.visibility = 'visible'
+            return true
         } else if (indexFilled[move0] === 'Player O' && indexFilled[move1] === 'Player O' && indexFilled[move2] === 'Player O') {
             // when player O fill the right block index combination, it wins
-            winMessage.innerHTML = `Player O wins`
+            winMessage.innerHTML = `Player O wins!`
             winMessage.style.visibility = 'visible'
+            return true
         } 
     }
     // create a condition to check tie: when all blocks has been filled but no winning condition is satisfied
     if (Object.keys(indexFilled).length === 9) {
         winMessage.innerHTML = `It's a tie!`
         winMessage.style.visibility = 'visible'
+        return true
+    } else {
+        return false
     }
+}
+
+// end the game when there is a game result
+const endGame = () => {
     
 }
