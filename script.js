@@ -8,34 +8,35 @@ const restartButton = document.querySelector('.game-restart');
 // define the initial variables - so they are ready for change in later functions
 let currentPlayer = 'Player X'
 let indexFilled = {};
-// let board = ['','','','','','','','','']
 
-// put X & O in the block when click
+
 
 // create a function to identify which block is clicked.
-// BUG
-const clickBlock = (clickBlockEvent) => {
+// BUG: when the block is clicked again, the sign will alter
+const handleClick = (clickBlockEvent) => {
     let clickedBlock = clickBlockEvent.target;
     let clickedBlockIndex = clickedBlock.dataset['blockIndex'];
+    // console.log(clickBlock.innerHTML) - undefined
     // when clicked, pop up individual signs for each player
-    if (currentPlayer === 'Player X') {
+    if (currentPlayer === 'Player X' && clickedBlock.innerHTML === '') {
         clickedBlock.innerHTML = 'X';
-    } else {
+        console.log(clickedBlock.innerHTML)
+    } else if (currentPlayer === 'Player O' && clickedBlock.innerHTML === '') {
         clickedBlock.innerHTML = 'O';
+        console.log(clickedBlock.innerHTML)
+    } else {
+
     }
-    // switch to another player
-    
     checkWin(clickedBlockIndex);
     switchPlayer();
 }
 
 // create a for loop to add event handler for each block, so they respond to clicks
 for (let block of blocks) {
-    block.addEventListener('click', clickBlock)
+    block.addEventListener('click', handleClick, {once: true})
 }
 
-// create a function to change player after each click
-//BUG
+// create a function to change player in display after each click
 const switchPlayer = () => {
     if (currentPlayer === 'Player X') {
         currentPlayer = 'Player O'
@@ -66,7 +67,7 @@ const checkWin = (index) => {
     indexFilled[propertyIndex] = currentPlayer;
     // loop the wining condition to check for wins
     for (let wins of winCondition) {
-        // define move variables to track player's move
+        // define move variables that returns the indices of win combination index
         let move0 = wins[0]
         let move1 = wins[1]
         let move2 = wins[2]
