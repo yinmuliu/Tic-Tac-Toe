@@ -9,19 +9,14 @@ const restartButton = document.querySelector('.game-restart');
 let currentPlayer = 'Player X'
 let indexFilled = {};
 
-// add event handler for each block, so they respond to clicks only once
-for (let block of blocks) {
-    block.addEventListener('click', handleClick, {once: true})
-}
-
 // create a function for actions after the blocks are clicked
 const handleClick = (clickBlockEvent) => {
     let clickedBlock = clickBlockEvent.target;
     let clickedBlockIndex = clickedBlock.dataset['blockIndex'];
     // Place sign
-    if (player === 'Player X') {
+    if (currentPlayer === 'Player X') {
         clickedBlock.innerHTML = 'X';
-    } else if (player === 'Player O') {
+    } else if (currentPlayer === 'Player O') {
         clickedBlock.innerHTML = 'O';
     }
     // Check for win
@@ -29,6 +24,11 @@ const handleClick = (clickBlockEvent) => {
     // Check for draw
     // Switch turn
     switchPlayer();
+}
+
+// add event handler for each block, so they respond to clicks only once
+for (let block of blocks) {
+    block.addEventListener('click', handleClick, {once: true})
 }
 
 
