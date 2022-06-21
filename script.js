@@ -9,34 +9,35 @@ const restartButton = document.querySelector('.game-restart');
 let currentPlayer = 'Player X'
 let indexFilled = {};
 
-
-
-// create a function to identify which block is clicked.
-// BUG: when the block is clicked again, the sign will alter
-const handleClick = (clickBlockEvent) => {
-    let clickedBlock = clickBlockEvent.target;
-    let clickedBlockIndex = clickedBlock.dataset['blockIndex'];
-    // console.log(clickBlock.innerHTML) - undefined
-    // when clicked, pop up individual signs for each player
-    if (currentPlayer === 'Player X' && clickedBlock.innerHTML === '') {
-        clickedBlock.innerHTML = 'X';
-        console.log(clickedBlock.innerHTML)
-    } else if (currentPlayer === 'Player O' && clickedBlock.innerHTML === '') {
-        clickedBlock.innerHTML = 'O';
-        console.log(clickedBlock.innerHTML)
-    } else {
-
-    }
-    checkWin(clickedBlockIndex);
-    switchPlayer();
-}
-
-// create a for loop to add event handler for each block, so they respond to clicks
+// add event handler for each block, so they respond to clicks only once
 for (let block of blocks) {
     block.addEventListener('click', handleClick, {once: true})
 }
 
-// create a function to change player in display after each click
+// create a function for actions after the blocks are clicked
+const handleClick = (clickBlockEvent) => {
+    let clickedBlock = clickBlockEvent.target;
+    let clickedBlockIndex = clickedBlock.dataset['blockIndex'];
+    // Place sign
+    if (player === 'Player X') {
+        clickedBlock.innerHTML = 'X';
+    } else if (player === 'Player O') {
+        clickedBlock.innerHTML = 'O';
+    }
+    // Check for win
+    checkWin(clickedBlockIndex)
+    // Check for draw
+    // Switch turn
+    switchPlayer();
+}
+
+
+// place a sign in the block when it is clicked
+const placeSign = (player) => {
+    
+}
+
+// change player in display after each click
 const switchPlayer = () => {
     if (currentPlayer === 'Player X') {
         currentPlayer = 'Player O'
@@ -90,9 +91,3 @@ const checkWin = (index) => {
     }
 
 }
-
-// create a function called printWin returns a string (to game status)
-// 2.pop up "player wins!/It's a tie!" in game status
-
-
-// clear game board
