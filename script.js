@@ -12,19 +12,19 @@ let indexFilled = {};
 
 // create a function for actions after the blocks are clicked
 const handleClick = (clickBlockEvent) => { 
-    let clickedBlock = clickBlockEvent.target;
+    let clickedBlock = clickBlockEvent.currentTarget;
     let clickedBlockIndex = clickedBlock.dataset['blockIndex'];
     
     // check if the block is filled
+    // BUG - exist in the if condition: need to check if there is no element in the block div?
     if (clickedBlock.innerHTML === '') {
         // if empty, can place sign and then set cursor to not allowed
-        placeSign(currentPlayer, clickedBlock)
-        clickedBlock.style.cursor = 'not-allowed'
+        console.log(clickedBlock);
+        placeSign(currentPlayer, clickedBlock)                                          
     } else {
         // else if it is not clicked, set the cursor to pointer
-        clickedBlock.style.cursor = 'pointer'
     }
-
+    
     // check if there is a winner/a tie
     if (checkWin(clickedBlockIndex)) {
         showResult()
@@ -42,21 +42,25 @@ for (let block of blocks) {
 // place a sign in the block when it is clicked
 const placeSign = (player, clickedBlock) => {
     if (player === 'Player X') {
-        let catPaw = document.createElement('img');
-        catPaw.src = './images/img-cat.jpeg';
-        catPaw.width = 120;
-        clickedBlock.appendChild(catPaw);
+        // let catPaw = document.createElement('img');
+        // catPaw.src = './images/img-cat.jpeg';
+        // catPaw.width = 120;
+        // clickedBlock.appendChild(catPaw);
+        clickedBlock.innerHTML = 'X'
+        clickedBlock.classList.add('playerX')
+        // clickedBlock.style.cursor = 'not-allowed'
         
     } else if (player === 'Player O') {
-        let dogPaw = document.createElement('img');
-        dogPaw.src = './images/img-dog.jpeg';
-        dogPaw.width = 120;
-        clickedBlock.appendChild(dogPaw);
+        clickedBlock.innerHTML = 'O'
+        clickedBlock.classList.add('playerO')
+        // clickedBlock.style.cursor = 'not-allowed'
+
     }
 }
 
 // change player in display after each click
 const switchPlayer = () => {
+    console.log(currentPlayer)
     if (currentPlayer === 'Player X') {
         currentPlayer = 'Player O'
         playersTurn.innerHTML = 'Player O'
@@ -94,11 +98,13 @@ const checkWin = (index) => {
         // indexFilled[move0] returns the value (player name) that occupied the object key (block index)
         if (indexFilled[move0] === 'Player X' && indexFilled[move1] === 'Player X' && indexFilled[move2] === 'Player X') {
             // when player X fill the right block index combination, it wins
+            console.log('checkWin - Player X wins')
             winMessage.innerHTML = `Player X wins!`
             // winMessage.style.visibility = 'visible'
             return true
         } else if (indexFilled[move0] === 'Player O' && indexFilled[move1] === 'Player O' && indexFilled[move2] === 'Player O') {
             // when player O fill the right block index combination, it wins
+            console.log('checkWin - Player O wins')
             winMessage.innerHTML = `Player O wins!`
             // winMessage.style.visibility = 'visible'
             return true
@@ -130,18 +136,44 @@ const playAgain = () => {
     for (let block of blocks) {
         // clear the board
         block.innerHTML = ''
+        block.classList.remove('playerO', 'playerX')
         // reset cursor to pointer
         block.style.cursor = 'pointer'
     }
     // reset object to empty
     indexFilled = {}
-    
+    // reset current player to the winner
+    currentPlayer = 'Player X'
+
     // add score to the winner
+    // addScore()
+    
+}
+playAgainButton.addEventListener('click', playAgain);
+
+// add score to the winner
+// const addScore = () => {
+//     let playerXScore = parseInt(document.getElementById('playerXScore').innerHTML)
+//     let playerOScore = parseInt(document.getElementById('playerOScore').innerHTML)
+//     if (winMessage.innerHTML === `Player X wins!`) {
+        
+//         playerXScore++;
+//     } else if (winMessage.innerHTML = `Player O wins!`) {
+        
+//         playerOScore++;
+//     }
+//     console.log(playerXScore);
+    // add score to webpage display
+
         // if winner = x, score increment by 1
         // if winner = o, score increment by 1
         // if tie, no score increment
-    // player need to be able to put signs in again!!!
-    // add a startGame() function
+// }
+
+
+// end the game
+const endGame = () => {
+    // reset the score to 0
+    // go back to homepage
 }
-playAgainButton.addEventListener('click', playAgain);
 
