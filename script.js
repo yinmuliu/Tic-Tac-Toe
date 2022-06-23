@@ -4,12 +4,15 @@ const playersTurn = document.querySelector('.playersTurn') // for displaying pla
 const winMessage = document.querySelector('.announcer');
 const hiddenResultPage = document.getElementById('resultpage');
 const playAgainButton = document.querySelector('.playagain');
+const endGameButton = document.querySelector('.game-end')
 const addPlayerXScore = document.getElementById('playerXScore')
 const addPlayerOScore = document.getElementById('playerOScore')
 
+// const meowSound = new Audio('./sound/meow.mp3')
 
 // define the initial variables - so they are ready for change in later functions
-let currentPlayer = 'Player X'
+let currentPlayer = 'Kitty'
+// let playSounds = true
 let indexFilled = {};
 let playerXScore = 0;
 let playerOScore = 0;
@@ -36,18 +39,19 @@ for (let block of blocks) {
     block.addEventListener('click', handleClick)
 }
 
-
 // place a sign in the block when it is clicked
 const placeSign = (player, clickedBlock) => {
-    if (player === 'Player X') {
+    if (player === 'Kitty') {
         // let catPaw = document.createElement('img');
         // catPaw.src = './images/img-cat.jpeg';
         // catPaw.width = 120;
         // clickedBlock.appendChild(catPaw);
         clickedBlock.innerHTML = 'X'
         clickedBlock.classList.add('playerX')
-        
-    } else if (player === 'Player O') {
+        // if (playSounds) {
+        //     meowSound.play()
+        // }
+    } else if (player === 'Doggo') {
         clickedBlock.innerHTML = 'O'
         clickedBlock.classList.add('playerO')
     }
@@ -55,12 +59,12 @@ const placeSign = (player, clickedBlock) => {
 
 // change player in display after each click
 const switchPlayer = () => {
-    if (currentPlayer === 'Player X') {
-        currentPlayer = 'Player O'
-        playersTurn.innerHTML = 'Player O'
+    if (currentPlayer === 'Kitty') {
+        currentPlayer = 'Doggo'
+        playersTurn.innerHTML = 'Doggo'
     } else {
-        currentPlayer = 'Player X'
-        playersTurn.innerHTML = 'Player X'
+        currentPlayer = 'Kitty'
+        playersTurn.innerHTML = 'Kitty'
     }
 }
 
@@ -90,13 +94,13 @@ const checkWin = (index) => {
         let move2 = wins[2]
         // create a if-else condition to check winner
         // indexFilled[move0] returns the value (player name) that occupied the object key (block index)
-        if (indexFilled[move0] === 'Player X' && indexFilled[move1] === 'Player X' && indexFilled[move2] === 'Player X') {
+        if (indexFilled[move0] === 'Kitty' && indexFilled[move1] === 'Kitty' && indexFilled[move2] === 'Kitty') {
             // when player X fill the right block index combination, it wins
-            winMessage.innerHTML = `Player X wins!`
+            winMessage.innerHTML = `Kitty wins!`
             return true
-        } else if (indexFilled[move0] === 'Player O' && indexFilled[move1] === 'Player O' && indexFilled[move2] === 'Player O') {
+        } else if (indexFilled[move0] === 'Doggo' && indexFilled[move1] === 'Doggo' && indexFilled[move2] === 'Doggo') {
             // when player O fill the right block index combination, it wins
-            winMessage.innerHTML = `Player O wins!`
+            winMessage.innerHTML = `Doggo wins!`
             return true
         } 
     }
@@ -116,11 +120,7 @@ const showResult = () => {
     // add effect on popping up
 }
 
-
-// play the game again - when the "play again" button is clicked
-const playAgain = () => {
-    // hide result page
-    hiddenResultPage.style.display = 'none';
+const resetBoard = () => {
     for (let block of blocks) {
         // clear the board
         block.innerHTML = ''
@@ -130,29 +130,42 @@ const playAgain = () => {
     }
     // reset object to empty
     indexFilled = {}
-    // reset current player to the winner
-    currentPlayer = 'Player X'
+}
+
+
+// play the game again - when the "play again" button is clicked
+const playAgain = () => {
+    // hide result page
+    hiddenResultPage.style.display = 'none';
     // add score to the winner
+    resetBoard()
     addScore()
 }
 playAgainButton.addEventListener('click', playAgain);
 
 // add score to the winner
 const addScore = () => {
-    if (winMessage.innerHTML === `Player X wins!`) {
+    if (winMessage.innerHTML === `Kitty wins!`) {
         playerXScore++;
-    } else if (winMessage.innerHTML === `Player O wins!`) { 
+    } else if (winMessage.innerHTML === `Doggo wins!`) { 
         playerOScore++;
     }
     // add score to HTML
     addPlayerXScore.innerHTML = playerXScore;
     addPlayerOScore.innerHTML = playerOScore;
+    // switch player
+    switchPlayer()
  }
 
 
 // end the game
 const endGame = () => {
     // reset the score to 0
-    // go back to homepage
+    resetBoard()
+    playerXScore = 0;
+    playerOScore = 0;
+    addPlayerXScore.innerHTML = 0;
+    addPlayerOScore.innerHTML = 0;
 }
+endGameButton.addEventListener('click', endGame)
 
