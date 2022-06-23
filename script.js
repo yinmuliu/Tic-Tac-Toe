@@ -8,14 +8,19 @@ const endGameButton = document.querySelector('.game-end')
 const addPlayerXScore = document.getElementById('playerXScore')
 const addPlayerOScore = document.getElementById('playerOScore')
 
-// const meowSound = new Audio('./sound/meow.mp3')
-
 // define the initial variables - so they are ready for change in later functions
 let currentPlayer = 'Kitty'
-// let playSounds = true
+let playSounds = true
 let indexFilled = {};
 let playerXScore = 0;
 let playerOScore = 0;
+
+// define audio file 
+const meowSound = new Audio('./audio/meow.wav')
+const woofSound = new Audio('./audio/woof.wav')
+const buttonSound = new Audio('./audio/click.wav')
+const winSound = new Audio('./audio/win.wav')
+const tieSound = new Audio('./audio/tie.wav')
 
 // create a function for actions after the blocks are clicked
 const handleClick = (clickBlockEvent) => { 
@@ -28,6 +33,9 @@ const handleClick = (clickBlockEvent) => {
         // check if there is a winner/a tie
         if (checkWin(clickedBlockIndex)) {
             showResult()
+            if (playSounds) {
+                winSound.play()
+            }
         } else {
             switchPlayer()
         }
@@ -48,12 +56,15 @@ const placeSign = (player, clickedBlock) => {
         // clickedBlock.appendChild(catPaw);
         clickedBlock.innerHTML = 'X'
         clickedBlock.classList.add('playerX')
-        // if (playSounds) {
-        //     meowSound.play()
-        // }
+        if (playSounds) {
+            meowSound.play()
+        }
     } else if (player === 'Doggo') {
         clickedBlock.innerHTML = 'O'
         clickedBlock.classList.add('playerO')
+        if (playSounds) {
+            woofSound.play()
+        }
     }
 }
 
@@ -107,6 +118,9 @@ const checkWin = (index) => {
     // create a condition to check tie: when all blocks has been filled but no winning condition is satisfied
     if (Object.keys(indexFilled).length === 9) {
         winMessage.innerHTML = `It's a tie!`
+        if (playSounds) {
+            tieSound.play()
+        }
         return true
     } else {
         return false
@@ -168,4 +182,7 @@ const endGame = () => {
     addPlayerOScore.innerHTML = 0;
 }
 endGameButton.addEventListener('click', endGame)
+
+
+
 

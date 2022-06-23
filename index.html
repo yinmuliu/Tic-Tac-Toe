@@ -39,13 +39,13 @@
             </div>
         </div>
         <footer>
-            <button class="game-end">Clear Score</button>
-            <button class="audio-control">Sound Off</button>
+            <button class="game-end" onclick="buttonSound.play()">Clear Score</button>
+            <button class="audio-control" onclick="buttonSound.play()">Sound Off</button>
         </footer>
     </section>
     <section class="hidden" id="resultpage">
         <h3 class="announcer">Kitty wins!</h3>
-        <button class="playagain">Play Again</button>
+        <button class="playagain" onclick="buttonSound.play()">Play Again</button>
         
     </section>
     <script src="./script.js"></script>
