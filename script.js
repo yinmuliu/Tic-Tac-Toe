@@ -5,6 +5,7 @@ const winMessage = document.querySelector('.announcer');
 const hiddenResultPage = document.getElementById('resultpage');
 const playAgainButton = document.querySelector('.playagain');
 const endGameButton = document.querySelector('.game-end')
+const soundButton = document.querySelector('.audio-control')
 const addPlayerXScore = document.getElementById('playerXScore')
 const addPlayerOScore = document.getElementById('playerOScore')
 
@@ -171,7 +172,6 @@ const addScore = () => {
     switchPlayer()
  }
 
-
 // end the game
 const endGame = () => {
     // reset the score to 0
@@ -182,6 +182,21 @@ const endGame = () => {
     addPlayerOScore.innerHTML = 0;
 }
 endGameButton.addEventListener('click', endGame)
+
+// manipulate sound on/off
+const manipulateSound = () => {
+    let buttons = document.querySelectorAll('button');
+    if (playSounds) {
+        playSounds = false;
+        buttonSound.muted = !playSounds;
+        soundButton.innerHTML = "Sound On";
+    } else {
+        playSounds = true;
+        buttonSound.muted = !playSounds;
+        soundButton.innerHTML = "Sound Off";
+    }
+}
+soundButton.addEventListener('click', manipulateSound)
 
 
 
