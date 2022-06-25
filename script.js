@@ -8,6 +8,12 @@ const endGameButton = document.querySelector('.game-end')
 const soundButton = document.querySelector('.audio-control')
 const addPlayerXScore = document.getElementById('playerXScore')
 const addPlayerOScore = document.getElementById('playerOScore')
+const uploadKittyPic = document.getElementById('upload_kitty_pic')
+const uploadDoggoPic = document.getElementById('upload_doggo_pic')
+const kittyPicTarget = document.querySelector('.kitty_pic_target')
+const doggoPicTarget = document.querySelector('.doggo_pic_target')
+const uploadKittyPicButton = document.querySelector('#change_kitty_pic')
+const uploadDoggoPicButton = document.querySelector('#change_doggo_pic')
 
 // define the initial variables - so they are ready for change in later functions
 let currentPlayer = 'Kitty'
@@ -197,6 +203,20 @@ const manipulateSound = () => {
     }
 }
 soundButton.addEventListener('click', manipulateSound)
+
+// upload player's picture
+const uploadCatPic = () => {
+    let catPic = window.URL.createObjectURL(uploadKittyPic.files[0]);
+    kittyPicTarget.src = catPic;
+}
+uploadKittyPicButton.addEventListener('click', uploadCatPic)
+
+const uploadDogPic = () => {
+    let dogPic = window.URL.createObjectURL(uploadDoggoPic.files[0]);
+    doggoPicTarget.src = dogPic;
+}
+uploadDoggoPicButton.addEventListener('click', uploadDogPic)
+
 
 
 
