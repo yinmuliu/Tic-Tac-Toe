@@ -29,6 +29,7 @@ const buttonSound = new Audio('./audio/click.wav')
 const winSound = new Audio('./audio/win.wav')
 const tieSound = new Audio('./audio/tie.wav')
 
+// =========================== //
 // create a function for actions after the blocks are clicked
 const handleClick = (clickBlockEvent) => { 
     let clickedBlock = clickBlockEvent.currentTarget;
@@ -49,18 +50,16 @@ const handleClick = (clickBlockEvent) => {
     }
 }
 
-// add event handler for each block, so they respond to clicks only once
+
+// add event handler for each block, so they respond to clicks
 for (let block of blocks) {
     block.addEventListener('click', handleClick)
 }
 
+
 // place a sign in the block when it is clicked
 const placeSign = (player, clickedBlock) => {
     if (player === 'Kitty') {
-        // let catPaw = document.createElement('img');
-        // catPaw.src = './images/img-cat.jpeg';
-        // catPaw.width = 120;
-        // clickedBlock.appendChild(catPaw);
         clickedBlock.innerHTML = 'X'
         clickedBlock.classList.add('playerX')
         if (playSounds) {
@@ -75,6 +74,7 @@ const placeSign = (player, clickedBlock) => {
     }
 }
 
+
 // change player in display after each click
 const switchPlayer = () => {
     if (currentPlayer === 'Kitty') {
@@ -85,6 +85,7 @@ const switchPlayer = () => {
         playersTurn.innerHTML = 'Kitty'
     }
 }
+
 
 // create a win condition array, those are the combination when the player wins
 const winCondition = [
@@ -97,6 +98,7 @@ const winCondition = [
     [2, 4, 6],
     [3, 4, 5],
 ]
+
 
 // check win and return a boolean
 const checkWin = (index) => {
@@ -134,13 +136,15 @@ const checkWin = (index) => {
     }
 }
 
+
 // end the game when there is a game result
 const showResult = () => {
     // pop up hidden result section - display change to block
     hiddenResultPage.style.display = 'block';
-    // add effect on popping up
 }
 
+
+// reset to clear the board - start new game
 const resetBoard = () => {
     for (let block of blocks) {
         // clear the board
@@ -164,6 +168,7 @@ const playAgain = () => {
 }
 playAgainButton.addEventListener('click', playAgain);
 
+
 // add score to the winner
 const addScore = () => {
     if (winMessage.innerHTML === `Kitty wins!`) {
@@ -178,7 +183,8 @@ const addScore = () => {
     switchPlayer()
  }
 
-// end the game
+
+// clear score
 const endGame = () => {
     // reset the score to 0
     resetBoard()
@@ -188,6 +194,7 @@ const endGame = () => {
     addPlayerOScore.innerHTML = 0;
 }
 endGameButton.addEventListener('click', endGame)
+
 
 // manipulate sound on/off
 const manipulateSound = () => {
@@ -203,6 +210,7 @@ const manipulateSound = () => {
     }
 }
 soundButton.addEventListener('click', manipulateSound)
+
 
 // upload player's picture
 const uploadCatPic = () => {
