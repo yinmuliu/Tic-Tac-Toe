@@ -2,8 +2,6 @@
 Play with Kitty and Doggo!  
 To enter the game，[click here](https://ymcodespace.github.io/Tic-Tac-Toe/).
 
-<br>  
-
 
 ## Snapshot  
 ![game_page](./images/Snapshot01.png)  
@@ -11,8 +9,7 @@ To enter the game，[click here](https://ymcodespace.github.io/Tic-Tac-Toe/).
 ![result_page](./images/Snapshot02.png)  
 
 ![picture_changed](./images/Snapshot03.png)  
-
-<br>  
+ 
 
 ## Tech used  
 - HTML
@@ -20,7 +17,6 @@ To enter the game，[click here](https://ymcodespace.github.io/Tic-Tac-Toe/).
 - Javascript
 - DOM
 
-<br>  
 
 ## Features 
 1. Upload your kitty/doggo’s picture to battle
@@ -31,7 +27,6 @@ To enter the game，[click here](https://ymcodespace.github.io/Tic-Tac-Toe/).
 6. Turn off the sound if it gets too annoying
 7. Animated win message and cheering music  
 
-<br>  
  
 ## Planning and development  
 Initial wireframing:  
@@ -41,8 +36,7 @@ Initially the two players are cats, the signs are paws. When implementing, the p
 To add winning message, a result pop-up page is later implemented, with CSS animation.
 
 Due to time restriction, the 5x5 grid play mode is not implemented. which can be updated in the coming weeks. Stay tuned!  
-
-<br>  
+ 
 
 ## Bugs and solutions  
 ### Altering signs
@@ -176,8 +170,7 @@ const buttonSound = new Audio('./audio/click.wav')
 ![code](./images/codeshot.png)
 
 I also ask Yixuan why put !playSounds rather than true/false, she explained that is to make sure you will not risk messing up with code when you want to edit this function later. We only want single source of truth, coming from “playSound” which controls all sounds including the button sound. For me that’s establishing a link between a child and its parent to prevent unnecessary change to this function.
-
-<br>  
+ 
 
 ## Improvement ideas  
 To upgrade the level of difficulties:
@@ -188,4 +181,11 @@ To upgrade the level of difficulties:
 To make it user-friendly and fun:
 
 1. add a homepage to choose play mode or upload kitty/doggo’s picture
-2. add responsive web design to fit a smaller screen (need to change all px into %)
+2. add responsive web design to fit a smaller screen (need to change all px into %)  
+
+
+## Acknowledgements  
+Thanks to Dido, Mandy and Hugh @ General Assembly and Yixuan for modeling how to debug and guiding me to the right resources throughout this project. Their patience and the kind will to help a newbie grow are highly appreciated!  
+
+
+This project was undertaken as part of the General Assembly's SEI59 course, June 2022.
